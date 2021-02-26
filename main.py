@@ -15,16 +15,20 @@ def crackMd5(first, second):
     else:
         return False
 
-dictionaryName = input("Inserisci il nome del file da utilizzare come dizionario: ")
-if (dictionaryName and dictionaryName != ''):
-    stringToCrack = input("Inserisci la stringa in formato MD5 da craccare: ")
-    if (stringToCrack and stringToCrack != ''):
-        result = openDictionary(dictionaryName, stringToCrack)
-        if (result != False):
-            print("La stringa inserita corrisponde a: " + result)
+def main():
+    dictionaryName = input("Inserisci il nome del file da utilizzare come dizionario: ")
+    if (dictionaryName and dictionaryName != ''):
+        stringToCrack = input("Inserisci la stringa in formato MD5 da craccare: ")
+        if (stringToCrack and stringToCrack != ''):
+            result = openDictionary(dictionaryName, stringToCrack)
+            if (result != False):
+                print("La stringa inserita corrisponde a: " + result)
+            else:
+                print("La ricerca non ha fornito risultati.")
         else:
-            print("La ricerca non ha fornito risultati.")
+            print("La stringa da craccare non può essere vuota.")
     else:
-        print("La stringa da craccare non può essere vuota.")
-else:
-    print("Non è stato possibile accedere al file utilizzato come dizionario.")
+        print("Non è stato possibile accedere al file utilizzato come dizionario.")
+
+if __name__ == '__main__':
+    main()
