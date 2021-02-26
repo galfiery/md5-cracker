@@ -1,11 +1,26 @@
 import hashlib
 
+messages = [
+    'Inserisci il nome del file da utilizzare come dizionario: ',
+    'Inserisci la stringa in formato MD5 da craccare: ',
+    'La stringa inserita corrisponde a: ',
+    'La ricerca non ha fornito risultati.',
+    'La stringa da craccare non può essere vuota.',
+    'Non è stato possibile accedere al file utilizzato come dizionario.'
+]
+
+def getMessages(index):
+    return messages[index]
+
 def openDictionary(path, toCrack):
-    with open(path) as file:
-        lines = file.readlines()
-        for line in lines:
-            if (crackMd5(line.replace('\n', ''), toCrack)):
-                return line
+    try:
+        with open(path) as file:
+            lines = file.readlines()
+            for line in lines:
+                if (crackMd5(line.replace('\n', ''), toCrack)):
+                    return line
+            return False
+    except:
         return False
 
 def crackMd5(first, second):
@@ -16,19 +31,19 @@ def crackMd5(first, second):
         return False
 
 def main():
-    dictionaryName = input("Inserisci il nome del file da utilizzare come dizionario: ")
+    dictionaryName = input(getMessages(0))
     if (dictionaryName and dictionaryName != ''):
-        stringToCrack = input("Inserisci la stringa in formato MD5 da craccare: ")
+        stringToCrack = input(getMessages(1))
         if (stringToCrack and stringToCrack != ''):
             result = openDictionary(dictionaryName, stringToCrack)
             if (result != False):
-                print("La stringa inserita corrisponde a: " + result)
+                print(getMessages(2) + result)
             else:
-                print("La ricerca non ha fornito risultati.")
+                print(getMessages(3))
         else:
-            print("La stringa da craccare non può essere vuota.")
+            print(getMessages(4))
     else:
-        print("Non è stato possibile accedere al file utilizzato come dizionario.")
+        print(getMessages(5))
 
 if __name__ == '__main__':
     main()
